@@ -29,11 +29,15 @@ const defaultSettings: AppSettings = {
 };
 
 const defaultProfile: UserProfile = {
+  id: 'default-user',
   name: 'Alex Johnson',
   email: 'alex@analytics.co',
   avatar: 'AJ',
   role: 'Data Analyst',
   joinedAt: new Date('2023-06-15'),
+  bio: '',
+  location: '',
+  phone: '',
 };
 
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

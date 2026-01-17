@@ -34,11 +34,23 @@ export interface DateRange {
 }
 
 export interface UserProfile {
+  id: string;
   name: string;
   email: string;
   avatar: string;
+  avatarImage?: string;
   role: string;
   joinedAt: Date;
+  bio?: string;
+  location?: string;
+  phone?: string;
+}
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  password: string;
+  profile: UserProfile;
 }
 
 export interface AppSettings {
