@@ -17,7 +17,7 @@ interface SidebarProps {
 }
 
 const navigationItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/' },
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
   { id: 'upload', label: 'Upload Data', icon: Upload, path: '/upload' },
   { id: 'visualizations', label: 'Visualizations', icon: BarChart3, path: '/visualizations' },
   { id: 'reports', label: 'Reports', icon: FileText, path: '/reports' },

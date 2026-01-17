@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Bell, ChevronDown, Search, Menu } from 'lucide-react';
-import { useData } from '@/context/DataContext';
+import { useAuth } from '@/context/AuthContext';
 
 interface TopNavProps {
   onMenuClick: () => void;
@@ -8,8 +9,16 @@ interface TopNavProps {
 }
 
 export const TopNav: React.FC<TopNavProps> = ({ onMenuClick, isSidebarCollapsed }) => {
-  const { userProfile } = useData();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const profile = user?.profile;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <header 
@@ -51,12 +60,20 @@ export const TopNav: React.FC<TopNavProps> = ({ onMenuClick, isSidebarCollapsed 
               onClick={() => setShowDropdown(!showDropdown)}
               className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted transition-colors"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center text-sm font-medium text-primary-foreground">
-                {userProfile.avatar}
-              </div>
+              {profile?.avatarImage ? (
+                <img 
+                  src={profile.avatarImage} 
+                  alt={profile.name}
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center text-sm font-medium text-primary-foreground">
+                  {profile?.avatar || 'U'}
+                </div>
+              )}
               <div className="hidden md:block text-left">
-                <p className="text-sm font-medium text-foreground">{userProfile.name}</p>
-                <p className="text-xs text-muted-foreground">{userProfile.role}</p>
+                <p className="text-sm font-medium text-foreground">{profile?.name || 'User'}</p>
+                <p className="text-xs text-muted-foreground">{profile?.role || 'Member'}</p>
               </div>
               <ChevronDown className="w-4 h-4 text-muted-foreground hidden md:block" />
             </button>
@@ -70,7 +87,10 @@ export const TopNav: React.FC<TopNavProps> = ({ onMenuClick, isSidebarCollapsed 
                   Settings
                 </a>
                 <div className="border-t border-border my-2" />
-                <button className="w-full text-left px-4 py-2 text-sm text-destructive hover:bg-muted transition-colors">
+                <button 
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-sm text-destructive hover:bg-muted transition-colors"
+                >
                   Sign Out
                 </button>
               </div>
