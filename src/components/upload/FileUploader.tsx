@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Upload, FileText, AlertCircle, CheckCircle, X } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { useData } from '@/context/DataContext';
 import { parseCSV } from '@/utils/csvParser';
-import { DataRow } from '@/types/analytics';
 
 export const FileUploader: React.FC = () => {
   const { setData, setDatasets, datasets } = useData();
@@ -76,7 +75,6 @@ export const FileUploader: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Upload area */}
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -98,7 +96,7 @@ export const FileUploader: React.FC = () => {
 
         <div className="flex flex-col items-center gap-4">
           <div className={`p-4 rounded-full ${isDragging ? 'bg-primary/10' : 'bg-muted'}`}>
-            <Upload className={`w-8 h-8 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
+            <Icon name="upload" className={`w-8 h-8 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
           </div>
           
           <div>
@@ -121,28 +119,26 @@ export const FileUploader: React.FC = () => {
         )}
       </div>
 
-      {/* Status messages */}
       {error && (
         <div className="flex items-center gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive animate-scale-in">
-          <AlertCircle className="w-5 h-5 flex-shrink-0" />
+          <Icon name="alert-circle" className="w-5 h-5 flex-shrink-0" />
           <p className="text-sm">{error}</p>
           <button onClick={() => setError(null)} className="ml-auto p-1 hover:bg-destructive/10 rounded">
-            <X className="w-4 h-4" />
+            <Icon name="x" className="w-4 h-4" />
           </button>
         </div>
       )}
 
       {success && (
         <div className="flex items-center gap-3 p-4 bg-success/10 border border-success/20 rounded-lg text-success animate-scale-in">
-          <CheckCircle className="w-5 h-5 flex-shrink-0" />
+          <Icon name="check-circle" className="w-5 h-5 flex-shrink-0" />
           <p className="text-sm">{success}</p>
           <button onClick={() => setSuccess(null)} className="ml-auto p-1 hover:bg-success/10 rounded">
-            <X className="w-4 h-4" />
+            <Icon name="x" className="w-4 h-4" />
           </button>
         </div>
       )}
 
-      {/* Recent uploads */}
       {datasets.length > 0 && (
         <div>
           <h3 className="text-sm font-medium text-muted-foreground mb-3">Recent Uploads</h3>
@@ -152,7 +148,7 @@ export const FileUploader: React.FC = () => {
                 key={i}
                 className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg"
               >
-                <FileText className="w-5 h-5 text-primary" />
+                <Icon name="file-text" className="w-5 h-5 text-primary" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">{ds.name}</p>
                   <p className="text-xs text-muted-foreground">
@@ -165,7 +161,6 @@ export const FileUploader: React.FC = () => {
         </div>
       )}
 
-      {/* CSV Format guide */}
       <div className="p-4 bg-muted/30 rounded-lg">
         <h4 className="text-sm font-medium text-foreground mb-2">CSV Format</h4>
         <p className="text-xs text-muted-foreground mb-3">

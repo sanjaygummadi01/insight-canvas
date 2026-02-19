@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pencil, Trash2, Check, X } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { DataRow } from '@/types/analytics';
 import { useData } from '@/context/DataContext';
 
@@ -87,13 +87,13 @@ export const DataTable: React.FC<DataTableProps> = ({ data, maxRows = 50 }) => {
                         onClick={handleSave}
                         className="p-1 text-success hover:bg-success/10 rounded"
                       >
-                        <Check className="w-4 h-4" />
+                        <Icon name="check" className="w-4 h-4" />
                       </button>
                       <button
                         onClick={handleCancel}
                         className="p-1 text-muted-foreground hover:bg-muted rounded"
                       >
-                        <X className="w-4 h-4" />
+                        <Icon name="x" className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
@@ -117,14 +117,14 @@ export const DataTable: React.FC<DataTableProps> = ({ data, maxRows = 50 }) => {
                     className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors"
                     title="Edit row"
                   >
-                    <Pencil className="w-4 h-4" />
+                    <Icon name="pencil" className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => deleteRow(row.id)}
                     className="p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded transition-colors"
                     title="Delete row"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Icon name="trash" className="w-4 h-4" />
                   </button>
                 </div>
               </td>

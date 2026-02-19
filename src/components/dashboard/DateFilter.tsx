@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, X } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { DateRange } from '@/types/analytics';
 
 interface DateFilterProps {
@@ -37,7 +37,7 @@ export const DateFilter: React.FC<DateFilterProps> = ({ dateRange, onDateRangeCh
         onClick={() => setIsOpen(!isOpen)}
         className={`btn-secondary ${hasFilters ? 'border-primary text-primary' : ''}`}
       >
-        <Calendar className="w-4 h-4" />
+        <Icon name="calendar" className="w-4 h-4" />
         <span>
           {hasFilters ? 'Filters Active' : 'Date Filter'}
         </span>
@@ -54,7 +54,7 @@ export const DateFilter: React.FC<DateFilterProps> = ({ dateRange, onDateRangeCh
               onClick={() => setIsOpen(false)}
               className="p-1 rounded text-muted-foreground hover:text-foreground transition-colors"
             >
-              <X className="w-4 h-4" />
+              <Icon name="x" className="w-4 h-4" />
             </button>
           </div>
 
