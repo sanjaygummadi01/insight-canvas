@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bell, ChevronDown, Search, Menu } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 import { useAuth } from '@/context/AuthContext';
 
 interface TopNavProps {
@@ -27,17 +27,16 @@ export const TopNav: React.FC<TopNavProps> = ({ onMenuClick, isSidebarCollapsed 
       }`}
     >
       <div className="flex items-center justify-between h-full px-6">
-        {/* Left section */}
         <div className="flex items-center gap-4">
           <button
             onClick={onMenuClick}
             className="lg:hidden p-2 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
           >
-            <Menu className="w-5 h-5" />
+            <Icon name="menu" className="w-5 h-5" />
           </button>
           
           <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-muted rounded-lg">
-            <Search className="w-4 h-4 text-muted-foreground" />
+            <Icon name="search" className="w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search analytics..."
@@ -46,15 +45,12 @@ export const TopNav: React.FC<TopNavProps> = ({ onMenuClick, isSidebarCollapsed 
           </div>
         </div>
 
-        {/* Right section */}
         <div className="flex items-center gap-4">
-          {/* Notifications */}
           <button className="relative p-2 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-            <Bell className="w-5 h-5" />
+            <Icon name="bell" className="w-5 h-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full" />
           </button>
 
-          {/* User dropdown */}
           <div className="relative">
             <button
               onClick={() => setShowDropdown(!showDropdown)}
@@ -75,7 +71,7 @@ export const TopNav: React.FC<TopNavProps> = ({ onMenuClick, isSidebarCollapsed 
                 <p className="text-sm font-medium text-foreground">{profile?.name || 'User'}</p>
                 <p className="text-xs text-muted-foreground">{profile?.role || 'Member'}</p>
               </div>
-              <ChevronDown className="w-4 h-4 text-muted-foreground hidden md:block" />
+              <Icon name="chevron-down" className="w-4 h-4 text-muted-foreground hidden md:block" />
             </button>
 
             {showDropdown && (

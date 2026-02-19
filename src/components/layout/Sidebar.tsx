@@ -1,28 +1,19 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Upload, 
-  BarChart3, 
-  FileText, 
-  User, 
-  Settings,
-  ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
+import { Icon, IconName } from '@/components/icons/Icon';
 
 interface SidebarProps {
   isCollapsed: boolean;
   onToggle: () => void;
 }
 
-const navigationItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
-  { id: 'upload', label: 'Upload Data', icon: Upload, path: '/upload' },
-  { id: 'visualizations', label: 'Visualizations', icon: BarChart3, path: '/visualizations' },
-  { id: 'reports', label: 'Reports', icon: FileText, path: '/reports' },
-  { id: 'profile', label: 'Profile', icon: User, path: '/profile' },
-  { id: 'settings', label: 'Settings', icon: Settings, path: '/settings' },
+const navigationItems: { id: string; label: string; icon: IconName; path: string }[] = [
+  { id: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard', path: '/dashboard' },
+  { id: 'upload', label: 'Upload Data', icon: 'upload', path: '/upload' },
+  { id: 'visualizations', label: 'Visualizations', icon: 'bar-chart', path: '/visualizations' },
+  { id: 'reports', label: 'Reports', icon: 'file-text', path: '/reports' },
+  { id: 'profile', label: 'Profile', icon: 'user', path: '/profile' },
+  { id: 'settings', label: 'Settings', icon: 'settings', path: '/settings' },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
@@ -39,7 +30,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
         {!isCollapsed && (
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center">
-              <BarChart3 className="w-5 h-5 text-primary-foreground" />
+              <Icon name="bar-chart" className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-semibold text-sidebar-foreground">DataViz</span>
           </div>
@@ -48,7 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
           onClick={onToggle}
           className="p-2 rounded-lg text-sidebar-muted hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
         >
-          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          <Icon name={isCollapsed ? 'chevron-right' : 'chevron-left'} className="w-4 h-4" />
         </button>
       </div>
 
@@ -56,7 +47,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
       <nav className="p-3 space-y-1">
         {navigationItems.map((item) => {
           const isActive = location.pathname === item.path;
-          const Icon = item.icon;
 
           return (
             <NavLink
@@ -65,7 +55,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
               className={`sidebar-link ${isActive ? 'active' : ''} ${isCollapsed ? 'justify-center px-2' : ''}`}
               title={isCollapsed ? item.label : undefined}
             >
-              <Icon className="w-5 h-5 flex-shrink-0" />
+              <Icon name={item.icon} className="w-5 h-5 flex-shrink-0" />
               {!isCollapsed && <span>{item.label}</span>}
             </NavLink>
           );

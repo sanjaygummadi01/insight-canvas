@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { BarChart3, Mail, Lock, User, Eye, EyeOff, Loader2, Check } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -86,11 +86,10 @@ const Register: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Left Panel - Decorative */}
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-chart-2/10 via-primary/10 to-chart-2/5 items-center justify-center p-8">
         <div className="max-w-md text-center">
           <div className="w-32 h-32 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-chart-2 to-primary flex items-center justify-center">
-            <BarChart3 className="w-16 h-16 text-primary-foreground" />
+            <Icon name="bar-chart" className="w-16 h-16 text-primary-foreground" />
           </div>
           <h2 className="text-2xl font-bold text-foreground mb-4">
             Join Thousands of Analysts
@@ -102,13 +101,11 @@ const Register: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Panel - Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 mb-8">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center">
-              <BarChart3 className="w-6 h-6 text-primary-foreground" />
+              <Icon name="bar-chart" className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="text-2xl font-bold text-foreground">DataViz</span>
           </Link>
@@ -125,13 +122,10 @@ const Register: React.FC = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Name */}
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Full Name
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-2">Full Name</label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Icon name="user" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type="text"
                   value={name}
@@ -143,18 +137,13 @@ const Register: React.FC = () => {
                   }`}
                 />
               </div>
-              {getNameError() && (
-                <p className="mt-2 text-sm text-destructive">{getNameError()}</p>
-              )}
+              {getNameError() && <p className="mt-2 text-sm text-destructive">{getNameError()}</p>}
             </div>
 
-            {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Email Address
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-2">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Icon name="mail" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type="email"
                   value={email}
@@ -166,18 +155,13 @@ const Register: React.FC = () => {
                   }`}
                 />
               </div>
-              {getEmailError() && (
-                <p className="mt-2 text-sm text-destructive">{getEmailError()}</p>
-              )}
+              {getEmailError() && <p className="mt-2 text-sm text-destructive">{getEmailError()}</p>}
             </div>
 
-            {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-2">Password</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Icon name="lock" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
@@ -193,11 +177,10 @@ const Register: React.FC = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  <Icon name={showPassword ? 'eye-off' : 'eye'} className="w-5 h-5" />
                 </button>
               </div>
               
-              {/* Password Requirements */}
               {password && (
                 <div className="mt-3 space-y-2">
                   {passwordRequirements.map((req, i) => (
@@ -205,7 +188,7 @@ const Register: React.FC = () => {
                       <div className={`w-4 h-4 rounded-full flex items-center justify-center ${
                         req.met ? 'bg-success text-success-foreground' : 'bg-muted'
                       }`}>
-                        {req.met && <Check className="w-3 h-3" />}
+                        {req.met && <Icon name="check" className="w-3 h-3" />}
                       </div>
                       <span className={req.met ? 'text-success' : 'text-muted-foreground'}>
                         {req.label}
@@ -216,13 +199,10 @@ const Register: React.FC = () => {
               )}
             </div>
 
-            {/* Confirm Password */}
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Confirm Password
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-2">Confirm Password</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Icon name="lock" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={confirmPassword}
@@ -234,9 +214,7 @@ const Register: React.FC = () => {
                   }`}
                 />
               </div>
-              {getConfirmPasswordError() && (
-                <p className="mt-2 text-sm text-destructive">{getConfirmPasswordError()}</p>
-              )}
+              {getConfirmPasswordError() && <p className="mt-2 text-sm text-destructive">{getConfirmPasswordError()}</p>}
             </div>
 
             <button
@@ -246,7 +224,7 @@ const Register: React.FC = () => {
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
                   Creating account...
                 </>
               ) : (

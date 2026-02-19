@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, FileJson, FileSpreadsheet, Zap } from 'lucide-react';
+import { Icon, IconName } from '@/components/icons/Icon';
 import { DataRow, ExportFormat } from '@/types/analytics';
 import { generateCSV, generateJSON, generatePowerBICSV, downloadFile } from '@/utils/csvParser';
 
@@ -26,22 +26,22 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ data }) => {
     }
   };
 
-  const exportOptions = [
+  const exportOptions: { format: ExportFormat; icon: IconName; title: string; description: string }[] = [
     {
       format: ExportFormat.CSV,
-      icon: FileSpreadsheet,
+      icon: 'file-spreadsheet',
       title: 'Export CSV',
       description: 'Standard CSV format with all data',
     },
     {
       format: ExportFormat.JSON,
-      icon: FileJson,
+      icon: 'file-json',
       title: 'Export JSON',
       description: 'JSON format for web applications',
     },
     {
       format: ExportFormat.POWERBI,
-      icon: Zap,
+      icon: 'zap',
       title: 'Export for Power BI',
       description: 'Optimized CSV with proper formatting',
     },
@@ -49,7 +49,7 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ data }) => {
 
   return (
     <div className="grid gap-4 md:grid-cols-3">
-      {exportOptions.map(({ format, icon: Icon, title, description }) => (
+      {exportOptions.map(({ format, icon, title, description }) => (
         <button
           key={format}
           onClick={() => handleExport(format)}
@@ -58,13 +58,13 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ data }) => {
         >
           <div className="flex items-start gap-4">
             <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
-              <Icon className="w-6 h-6 text-primary" />
+              <Icon name={icon} className="w-6 h-6 text-primary" />
             </div>
             <div className="flex-1">
               <h3 className="font-medium text-foreground mb-1">{title}</h3>
               <p className="text-sm text-muted-foreground">{description}</p>
             </div>
-            <Download className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <Icon name="download" className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
           </div>
         </button>
       ))}

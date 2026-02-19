@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { BarChart3, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Icon } from '@/components/icons/Icon';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -54,13 +54,11 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Left Panel - Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 mb-8">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center">
-              <BarChart3 className="w-6 h-6 text-primary-foreground" />
+              <Icon name="bar-chart" className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="text-2xl font-bold text-foreground">DataViz</span>
           </Link>
@@ -77,13 +75,12 @@ const Login: React.FC = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Icon name="mail" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type="email"
                   value={email}
@@ -100,13 +97,12 @@ const Login: React.FC = () => {
               )}
             </div>
 
-            {/* Password */}
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Icon name="lock" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
@@ -122,7 +118,7 @@ const Login: React.FC = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  <Icon name={showPassword ? 'eye-off' : 'eye'} className="w-5 h-5" />
                 </button>
               </div>
               {getPasswordError() && (
@@ -137,7 +133,7 @@ const Login: React.FC = () => {
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
                   Signing in...
                 </>
               ) : (
@@ -155,11 +151,10 @@ const Login: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Panel - Decorative */}
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-primary/10 via-chart-2/10 to-primary/5 items-center justify-center p-8">
         <div className="max-w-md text-center">
           <div className="w-32 h-32 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-primary to-chart-2 flex items-center justify-center">
-            <BarChart3 className="w-16 h-16 text-primary-foreground" />
+            <Icon name="bar-chart" className="w-16 h-16 text-primary-foreground" />
           </div>
           <h2 className="text-2xl font-bold text-foreground mb-4">
             Powerful Analytics at Your Fingertips

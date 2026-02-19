@@ -1,7 +1,3 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { DataProvider } from "./context/DataContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
@@ -15,8 +11,6 @@ import Reports from "./pages/Reports";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
 
 // Protected Route wrapper
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -76,19 +70,13 @@ const AppRoutes = () => (
 );
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-        <DataProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </DataProvider>
-      </AuthProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <AuthProvider>
+    <DataProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </DataProvider>
+  </AuthProvider>
 );
 
 export default App;
