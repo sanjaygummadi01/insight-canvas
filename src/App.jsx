@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { DataProvider } from "./context/DataContext";
+import { HashRouter, Routes, Route } from "react-router-dom";import { DataProvider } from "./context/DataContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -49,7 +48,7 @@ const PublicRoute = ({ children }) => {
 };
 
 const AppRoutes = () => (
-  <Routes>
+  <HashRouter>
     <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
     <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
     <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
@@ -62,7 +61,7 @@ const AppRoutes = () => (
     <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
     
     <Route path="*" element={<NotFound />} />
-  </Routes>
+  </HashRouter>
 );
 
 const App = () => (
